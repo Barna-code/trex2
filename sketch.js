@@ -12,9 +12,9 @@ var score=0;
 
 var gameOver, restart;
 
-jumpSound = loadSound('jump.mp3');
-dieSound = loadSound('die.mp3');
-checkPointSound = loadSound('checkPoint.mp3');
+  jumpSound = loadSound("jump.mp3");
+  dieSound = loadSound("die.mp3");
+  checkPointSound = loadSound("checkPoint.mp3"); 
 
 localStorage["HighestScore"] = 0;
 
@@ -82,8 +82,9 @@ function draw() {
     ground.velocityX = -(6 + 3*score/100);
   
     if(keyDown("space") && trex.y >= 159) {
-      trex.velocityY = -12;
       jumpSound.play();
+      trex.velocityY = -12;
+      
     }
   
     trex.velocityY = trex.velocityY + 0.8
@@ -96,9 +97,14 @@ function draw() {
     spawnClouds();
     spawnObstacles();
   
+    if (score>0 && score%100 === 0){
+      checkPointSound.play();
+    }
+    
     if(obstaclesGroup.isTouching(trex)){
+      dieSound.play();  
         gameState = END;
-      dieSound.play(); 
+      
     }
   }
   else if (gameState === END) {
