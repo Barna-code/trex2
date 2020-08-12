@@ -12,6 +12,10 @@ var score=0;
 
 var gameOver, restart;
 
+jumpSound = loadSound('jump.mp3');
+dieSound = loadSound('die.mp3');
+checkPointSound = loadSound('checkPoint.mp3');
+
 localStorage["HighestScore"] = 0;
 
 function preload(){
@@ -94,6 +98,7 @@ function draw() {
   
     if(obstaclesGroup.isTouching(trex)){
         gameState = END;
+      dieSound.play(); 
     }
   }
   else if (gameState === END) {
